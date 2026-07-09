@@ -24,6 +24,10 @@
   display: none;
 }
 
+.nextra-menu-mobile ul:has(> li > a[href^="#"]) {
+  display: none;
+}
+
 .nextra-toc li > a.nx-text-primary-600 {
   color: #00d9b5;
 }

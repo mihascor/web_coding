@@ -1,9 +1,5 @@
 {
   "index": "Веб-кодинг в эпоху ИИ",
   "osnovy": "Основы Веб-кодинга",
-  "advanced": "Advanced (A Folder)",
-  "about": {
-    "title": "About",
-    "type": "page"
-  }
+  "nastrojka-ai-agenta": "Настройка ИИ-агента"
 }

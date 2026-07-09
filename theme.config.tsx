@@ -2,7 +2,7 @@ import React from "react";
 import { DocsThemeConfig } from "nextra-theme-docs";
 
 const config: DocsThemeConfig = {
-  logo: <span>ВЕБ-КОДИНГ</span>,
+  logo: <span>WEB-CODING</span>,
   feedback: {
     content: null,
   },

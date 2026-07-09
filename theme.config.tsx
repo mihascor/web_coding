@@ -21,8 +21,11 @@ const config: DocsThemeConfig = {
       };
     },
   },
+  search: {
+    placeholder: "Поиск по сайту...",
+  },
   footer: {
-    text: "mihascor studio © 2026",
+    text: "mihascor-studio © 2026",
   },
 };
 

@@ -1,0 +1,57 @@
+.nextra-toc ul {
+  position: relative;
+  padding-left: 1rem;
+}
+
+.nextra-toc ul::before {
+  position: absolute;
+  top: 0.25rem;
+  bottom: 0.25rem;
+  left: 0;
+  width: 1px;
+  background: rgba(148, 163, 184, 0.22);
+  content: "";
+}
+
+.nextra-toc li > a {
+  position: relative;
+  transition:
+    color 160ms ease,
+    transform 160ms ease;
+}
+
+.nextra-toc li:has(> a[class~="ltr:nx-pl-4"]) {
+  display: none;
+}
+
+.nextra-toc li > a.nx-text-primary-600 {
+  color: #00d9b5;
+}
+
+.nextra-toc li.toc-parent-active > a {
+  color: #00d9b5;
+}
+
+.nextra-toc li > a.nx-text-primary-600::before {
+  position: absolute;
+  top: 0.15rem;
+  bottom: 0.15rem;
+  left: -1rem;
+  width: 2px;
+  border-radius: 999px;
+  background: #00d9b5;
+  box-shadow: 0 0 12px rgba(0, 217, 181, 0.36);
+  content: "";
+}
+
+.nextra-toc li.toc-parent-active > a::before {
+  position: absolute;
+  top: 0.15rem;
+  bottom: 0.15rem;
+  left: -1rem;
+  width: 2px;
+  border-radius: 999px;
+  background: #00d9b5;
+  box-shadow: 0 0 12px rgba(0, 217, 181, 0.36);
+  content: "";
+}

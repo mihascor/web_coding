@@ -6,5 +6,6 @@
   "git-i-github": "Git и GitHub",
   "terminal": "Терминал",
   "npm-i-package-json": "npm и package.json",
-  "pnpm-vs-npm": "pnpm vs pnm"
+  "pnpm-vs-npm": "pnpm vs pnm",
+  "api-json-fetch": "API, JSON, fetch",
 }

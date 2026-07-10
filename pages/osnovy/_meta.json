@@ -5,5 +5,6 @@
   "kak-rabotaet-veb": "Как работает веб - браузер, сервер, HTTP",
   "git-i-github": "Git и GitHub",
   "terminal": "Терминал",
-  "npm-i-package-json": "npm и package.json"
+  "npm-i-package-json": "npm и package.json",
+  "pnpm-vs-npm": "pnpm vs pnm"
 }

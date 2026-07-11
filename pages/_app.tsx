@@ -1,11 +1,245 @@
 import "nextra-theme-docs/style.css";
 import "../styles/globals.css";
 import type { AppProps } from "next/app";
+import { useRouter } from "next/router";
 import { useEffect } from "react";
 
 const tocStorageKey = "web-coding:toc-headings-only";
+const sidebarStorageKey = "web-coding:sidebar-categories";
 
 export default function App({ Component, pageProps }: AppProps) {
+  const router = useRouter();
+
+  useEffect(() => {
+    const progressIndicator = document.createElement("div");
+    let animationFrame = 0;
+
+    progressIndicator.className = "article-reading-progress";
+    progressIndicator.setAttribute("aria-hidden", "true");
+    document.body.append(progressIndicator);
+
+    const updateProgress = () => {
+      animationFrame = 0;
+
+      const article = document.querySelector<HTMLElement>(".nextra-content");
+
+      if (!article) {
+        progressIndicator.style.transform = "scaleX(0)";
+        return;
+      }
+
+      const articleTop = window.scrollY + article.getBoundingClientRect().top;
+      const headerHeight = document.querySelector("header")?.offsetHeight || 64;
+      const scrollableHeight = Math.max(
+        article.offsetHeight - window.innerHeight + headerHeight,
+        1
+      );
+      const progress = Math.min(
+        Math.max((window.scrollY - articleTop + headerHeight) / scrollableHeight, 0),
+        1
+      );
+
+      progressIndicator.style.transform = `scaleX(${progress})`;
+    };
+
+    const scheduleUpdate = () => {
+      if (!animationFrame) {
+        animationFrame = window.requestAnimationFrame(updateProgress);
+      }
+    };
+
+    window.addEventListener("scroll", scheduleUpdate, { passive: true });
+    window.addEventListener("resize", scheduleUpdate);
+    router.events.on("routeChangeComplete", scheduleUpdate);
+    scheduleUpdate();
+
+    return () => {
+      window.removeEventListener("scroll", scheduleUpdate);
+      window.removeEventListener("resize", scheduleUpdate);
+      router.events.off("routeChangeComplete", scheduleUpdate);
+      window.cancelAnimationFrame(animationFrame);
+      progressIndicator.remove();
+    };
+  }, [router.events]);
+
+  useEffect(() => {
+    const openCurrentArticleCategory = () => {
+      const activeArticle = document.querySelector<HTMLAnchorElement>(
+        ".nextra-sidebar-container li.active > a[href]"
+      );
+      const categoryButtons: HTMLButtonElement[] = [];
+      let parent = activeArticle?.parentElement?.parentElement;
+
+      while (parent) {
+        if (parent.matches("li")) {
+          const categoryButton = parent.querySelector<HTMLButtonElement>(
+            ":scope > button"
+          );
+
+          if (categoryButton && !parent.classList.contains("open")) {
+            categoryButtons.unshift(categoryButton);
+          }
+        }
+
+        parent = parent.parentElement;
+      }
+
+      categoryButtons.forEach((button) => button.click());
+    };
+
+    const handleRouteChange = () => {
+      window.requestAnimationFrame(openCurrentArticleCategory);
+    };
+
+    router.events.on("routeChangeComplete", handleRouteChange);
+
+    return () => router.events.off("routeChangeComplete", handleRouteChange);
+  }, [router.events]);
+
+  useEffect(() => {
+    const setupSidebarCollapseButton = () => {
+      const sidebar = document.querySelector<HTMLElement>(
+        ".nextra-sidebar-container"
+      );
+
+      if (!sidebar) {
+        return;
+      }
+
+      if (sidebar.dataset.collapseButtonAdded) {
+        return;
+      }
+
+      const button = document.createElement("button");
+
+      button.type = "button";
+      button.className = "sidebar-collapse-button";
+      button.textContent = "Свернуть категории";
+      button.setAttribute("aria-label", "Свернуть раскрытые категории");
+      button.addEventListener("click", () => {
+        sidebar
+          .querySelectorAll<HTMLButtonElement>("li.open > button")
+          .forEach((categoryButton) => categoryButton.click());
+      });
+
+      sidebar.dataset.collapseButtonAdded = "true";
+      sidebar.prepend(button);
+    };
+
+    setupSidebarCollapseButton();
+
+    const observer = new MutationObserver(setupSidebarCollapseButton);
+    observer.observe(document.body, { childList: true, subtree: true });
+
+    return () => observer.disconnect();
+  }, []);
+
+  useEffect(() => {
+    type SidebarState = Record<string, boolean>;
+    let hasRestoredState = false;
+
+    const getFolderKey = (button: HTMLButtonElement) =>
+      button.textContent?.trim() || "";
+
+    const getSavedState = (): SidebarState => {
+      try {
+        const savedState = JSON.parse(
+          localStorage.getItem(sidebarStorageKey) || "{}"
+        );
+
+        return typeof savedState === "object" && savedState !== null
+          ? savedState
+          : {};
+      } catch {
+        return {};
+      }
+    };
+
+    const saveState = () => {
+      const sidebarState: SidebarState = {};
+
+      document
+        .querySelectorAll<HTMLButtonElement>(
+          ".nextra-sidebar-container li > button"
+        )
+        .forEach((button) => {
+          const folder = button.closest("li");
+          const key = getFolderKey(button);
+
+          if (folder && key) {
+            sidebarState[key] = folder.classList.contains("open");
+          }
+        });
+
+      try {
+        localStorage.setItem(sidebarStorageKey, JSON.stringify(sidebarState));
+      } catch {
+        // Ignore storage errors in private browsing or restricted environments.
+      }
+    };
+
+    const restoreState = () => {
+      if (hasRestoredState) {
+        return;
+      }
+
+      const savedState = getSavedState();
+      const categoryButtons = document.querySelectorAll<HTMLButtonElement>(
+        ".nextra-sidebar-container li > button"
+      );
+
+      if (!categoryButtons.length) {
+        return;
+      }
+
+      categoryButtons.forEach((button) => {
+          if (button.dataset.sidebarStateInitialized) {
+            return;
+          }
+
+          const folder = button.closest("li");
+          const key = getFolderKey(button);
+
+          if (!folder || !key) {
+            return;
+          }
+
+          button.dataset.sidebarStateInitialized = "true";
+
+          const isOpen = folder.classList.contains("open");
+          const shouldBeOpen = savedState[key] ?? false;
+
+          if (isOpen !== shouldBeOpen) {
+            button.click();
+          }
+        });
+
+      hasRestoredState = true;
+    };
+
+    const handleSidebarClick = (event: MouseEvent) => {
+      const target = event.target as HTMLElement;
+      const button = target.closest<HTMLButtonElement>(
+        ".nextra-sidebar-container li > button"
+      );
+
+      if (button) {
+        saveState();
+      }
+    };
+
+    restoreState();
+    document.addEventListener("click", handleSidebarClick);
+
+    const observer = new MutationObserver(restoreState);
+    observer.observe(document.body, { childList: true, subtree: true });
+
+    return () => {
+      document.removeEventListener("click", handleSidebarClick);
+      observer.disconnect();
+    };
+  }, []);
+
   useEffect(() => {
     const getSavedState = () => {
       try {

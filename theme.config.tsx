@@ -56,6 +56,15 @@ const config: DocsThemeConfig = {
   editLink: {
     component: null,
   },
+  gitTimestamp: ({ timestamp }) => (
+    <>
+      Обновлено: {timestamp.toLocaleDateString("ru-RU", {
+        day: "numeric",
+        month: "long",
+        year: "numeric",
+      })}
+    </>
+  ),
   toc: {
     title: "На этой странице",
   },

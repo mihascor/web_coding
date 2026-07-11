@@ -1,11 +1,11 @@
 .nextra-nav-container-blur {
-  background-color: rgb(255 255 255 / 70%) !important;
+  background-color: rgb(255 255 255 / 50%) !important;
   -webkit-backdrop-filter: blur(6px);
   backdrop-filter: blur(6px);
 }
 
 .dark .nextra-nav-container-blur {
-  background-color: rgb(17 17 17 / 70%) !important;
+  background-color: rgb(17 17 17 / 50%) !important;
 }
 
 .nextra-toc ul {

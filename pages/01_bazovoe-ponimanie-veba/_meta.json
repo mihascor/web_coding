@@ -1,5 +1,6 @@
 {
   "01_kak-rabotaet-veb-brauzer-server-i-internet": "Как работает веб: браузер, сервер и интернет",
   "02_chto-takoe-sait-veb-prilozhenie-i-chem-oni-otlichayutsya": "Что такое сайт, веб-приложение и чем они отличаются",
-  "03_klientskaya-i-servernaya-chast-frontend-i-backend": "Клиентская и серверная часть: frontend и backend"
+  "03_klientskaya-i-servernaya-chast-frontend-i-backend": "Клиентская и серверная часть: frontend и backend",
+  "04_chto-proiskhodit-kogda-polzovatel-otkryvaet-sait": "Что происходит, когда пользователь открывает сайт"
 }

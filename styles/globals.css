@@ -34,6 +34,11 @@
   display: none;
 }
 
+.nextra-sidebar-container .nextra-scrollbar,
+.nextra-toc .nextra-scrollbar {
+  overscroll-behavior: contain;
+}
+
 .article-reading-progress {
   position: fixed;
   top: var(--nextra-navbar-height);

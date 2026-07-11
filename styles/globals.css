@@ -20,12 +20,85 @@
     transform 160ms ease;
 }
 
-.nextra-toc li:has(> a[class~="ltr:nx-pl-4"]) {
+.nextra-toc li:has(> a[class~="ltr:nx-pl-8"]),
+.nextra-toc li:has(> a[class~="ltr:nx-pl-12"]),
+.nextra-toc li:has(> a[class~="ltr:nx-pl-16"]) {
+  display: none;
+}
+
+.nextra-toc.toc-headings-only li:has(> a[class~="ltr:nx-pl-4"]) {
   display: none;
 }
 
 .nextra-menu-mobile ul:has(> li > a[href^="#"]) {
   display: none;
+}
+
+.toc-title-with-toggle {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  padding-bottom: 0.75rem;
+  background: rgb(255, 255, 255);
+}
+
+.dark .toc-title-with-toggle {
+  background: rgb(17, 17, 17);
+}
+
+.toc-toggle-button {
+  position: relative;
+  width: 1.5rem;
+  height: 1.5rem;
+  flex: 0 0 auto;
+  border: 1px solid rgba(148, 163, 184, 0.28);
+  border-radius: 0.375rem;
+  color: rgb(156, 163, 175);
+  transition:
+    border-color 160ms ease,
+    color 160ms ease,
+    background-color 160ms ease;
+}
+
+.toc-toggle-button:hover {
+  border-color: rgba(14, 165, 233, 0.54);
+  color: rgb(14, 165, 233);
+  background: rgba(14, 165, 233, 0.08);
+}
+
+.toc-toggle-button::before,
+.toc-toggle-button::after {
+  position: absolute;
+  left: 50%;
+  width: 0.55rem;
+  height: 1px;
+  border-radius: 999px;
+  background: currentColor;
+  content: "";
+  transform-origin: center;
+  transition: transform 160ms ease;
+}
+
+.toc-toggle-button::before {
+  top: 0.58rem;
+  transform: translateX(-50%) rotate(0deg);
+}
+
+.toc-toggle-button::after {
+  bottom: 0.58rem;
+  transform: translateX(-50%) rotate(0deg);
+}
+
+.nextra-toc.toc-headings-only .toc-toggle-button::before {
+  transform: translateX(-50%) rotate(45deg);
+}
+
+.nextra-toc.toc-headings-only .toc-toggle-button::after {
+  transform: translateX(-50%) rotate(-45deg);
 }
 
 .nextra-toc li > a.nx-text-primary-600 {
@@ -34,7 +107,7 @@
   );
 }
 
-.nextra-toc li.toc-parent-active > a {
+.nextra-toc.toc-headings-only li.toc-parent-active > a {
   color: hsl(
     var(--nextra-primary-hue) var(--nextra-primary-saturation) 45%
   );
@@ -55,7 +128,7 @@
   content: "";
 }
 
-.nextra-toc li.toc-parent-active > a::before {
+.nextra-toc.toc-headings-only li.toc-parent-active > a::before {
   position: absolute;
   top: 0.15rem;
   bottom: 0.15rem;

@@ -49,7 +49,12 @@ function SidebarTitle({ title, route }: { title: string; route: string }) {
 }
 
 const config: DocsThemeConfig = {
-  logo: <span>WEB-CODING</span>,
+  logo: (
+    <span style={{ display: "inline-flex", alignItems: "center", gap: "0.5rem" }}>
+      <img src="/logo.png" alt="" aria-hidden="true" style={{ height: "28px", width: "auto" }} />
+      <span>WEB-CODING</span>
+    </span>
+  ),
   feedback: {
     content: null,
   },

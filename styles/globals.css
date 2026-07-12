@@ -8,6 +8,28 @@
   background-color: rgb(17 17 17 / 50%) !important;
 }
 
+.nextra-code-block pre[data-language] {
+  position: relative;
+  padding-top: 3rem !important;
+}
+
+.nextra-code-block pre[data-language]::before {
+  position: absolute;
+  top: 0.75rem;
+  left: 1rem;
+  color: rgb(75, 85, 99);
+  content: attr(data-language);
+  font-family: ui-sans-serif, system-ui, sans-serif;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.dark .nextra-code-block pre[data-language]::before {
+  color: rgb(209, 213, 219);
+}
+
 .nextra-toc ul {
   position: relative;
   padding-left: 1rem;

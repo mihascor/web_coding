@@ -2,5 +2,8 @@
   "01_kak-rabotaet-veb-brauzer-server-i-internet": "Как работает веб: браузер, сервер и интернет",
   "02_chto-takoe-sait-veb-prilozhenie-i-chem-oni-otlichayutsya": "Что такое сайт, веб-приложение и чем они отличаются",
   "03_klientskaya-i-servernaya-chast-frontend-i-backend": "Клиентская и серверная часть: frontend и backend",
-  "04_chto-proiskhodit-kogda-polzovatel-otkryvaet-sait": "Что происходит, когда пользователь открывает сайт"
+  "04_chto-proiskhodit-kogda-polzovatel-otkryvaet-sait": "Что происходит, когда пользователь открывает сайт",
+  "05_http-i-https-kak-brauzer-obshchaetsya-s-serverom": "HTTP и HTTPS: как браузер общается с сервером",
+  "06_domen-khosting-i-server-gde-zhivet-sait": "Домен, хостинг и сервер: где живет сайт",
+  "07_struktura-veb-proekta-iz-kakikh-chastei-sostoit-sait": "Структура веб-проекта: из каких частей обычно состоит сайт"
 }

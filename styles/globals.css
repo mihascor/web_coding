@@ -73,12 +73,18 @@ footer > div:last-child {
   flex: 0 0 auto;
 }
 
-.article-reading-progress {
+.article-reading-progress-container {
   position: fixed;
   top: var(--nextra-navbar-height);
   right: 0;
   left: 0;
   z-index: 30;
+  height: 5px;
+}
+
+.article-reading-progress {
+  position: absolute;
+  inset: 0;
   height: 5px;
   background: hsl(
     var(--nextra-primary-hue) var(--nextra-primary-saturation) 45%
@@ -86,6 +92,24 @@ footer > div:last-child {
   transform: scaleX(0);
   transform-origin: left center;
   transition: transform 80ms linear;
+}
+
+.article-reading-progress-label {
+  position: absolute;
+  top: -0.2rem;
+  padding: 0.1rem 0.3rem;
+  border-radius: 0.25rem;
+  background: transparent;
+  color: hsl(
+    var(--nextra-primary-hue) var(--nextra-primary-saturation) 45%
+  );
+  /* Размер шрифта процента прогресса. */
+  font-size: 0.8rem;
+  font-weight: 600;
+  line-height: 1;
+  white-space: nowrap;
+  transform: translate(-50%, -100%);
+  transition: left 80ms linear;
 }
 
 .sidebar-collapse-button {

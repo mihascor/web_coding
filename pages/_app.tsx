@@ -11,12 +11,17 @@ export default function App({ Component, pageProps }: AppProps) {
   const router = useRouter();
 
   useEffect(() => {
+    const progressContainer = document.createElement("div");
     const progressIndicator = document.createElement("div");
+    const progressLabel = document.createElement("span");
     let animationFrame = 0;
 
+    progressContainer.className = "article-reading-progress-container";
     progressIndicator.className = "article-reading-progress";
-    progressIndicator.setAttribute("aria-hidden", "true");
-    document.body.append(progressIndicator);
+    progressLabel.className = "article-reading-progress-label";
+    progressLabel.setAttribute("aria-hidden", "true");
+    progressContainer.append(progressIndicator, progressLabel);
+    document.body.append(progressContainer);
 
     const updateProgress = () => {
       animationFrame = 0;
@@ -25,6 +30,9 @@ export default function App({ Component, pageProps }: AppProps) {
 
       if (!article) {
         progressIndicator.style.transform = "scaleX(0)";
+        progressLabel.style.left = "0%";
+        progressLabel.style.transform = "translate(0, -100%)";
+        progressLabel.textContent = "0%";
         return;
       }
 
@@ -40,6 +48,9 @@ export default function App({ Component, pageProps }: AppProps) {
       );
 
       progressIndicator.style.transform = `scaleX(${progress})`;
+      progressLabel.style.left = `${progress * 100}%`;
+      progressLabel.style.transform = `translate(${progress === 0 ? 0 : progress === 1 ? -100 : -50}%, -100%)`;
+      progressLabel.textContent = `${Math.round(progress * 100)}%`;
     };
 
     const scheduleUpdate = () => {
@@ -58,7 +69,7 @@ export default function App({ Component, pageProps }: AppProps) {
       window.removeEventListener("resize", scheduleUpdate);
       router.events.off("routeChangeComplete", scheduleUpdate);
       window.cancelAnimationFrame(animationFrame);
-      progressIndicator.remove();
+      progressContainer.remove();
     };
   }, [router.events]);
 

@@ -49,6 +49,20 @@
   overscroll-behavior: contain;
 }
 
+.nextra-toc {
+  top: var(--nextra-navbar-height) !important;
+}
+
+.nextra-toc .nextra-scrollbar {
+  top: var(--nextra-navbar-height) !important;
+  padding-top: 0.75rem !important;
+}
+
+footer > div:last-child {
+  padding-top: 1.5rem !important;
+  padding-bottom: 1.5rem !important;
+}
+
 .sidebar-category-title {
   display: inline-flex;
   align-items: center;
@@ -113,7 +127,10 @@
   align-items: center;
   justify-content: space-between;
   gap: 0.5rem;
-  padding-bottom: 0.75rem;
+  min-height: 2.4375rem;
+  padding: 0.5rem 0.75rem;
+  border: 1px solid rgba(148, 163, 184, 0.28);
+  border-radius: 0.375rem;
   background: rgb(255, 255, 255);
 }
 

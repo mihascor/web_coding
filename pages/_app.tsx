@@ -114,7 +114,7 @@ export default function App({ Component, pageProps }: AppProps) {
 
       button.type = "button";
       button.className = "sidebar-collapse-button";
-      button.textContent = "Свернуть категории";
+      button.textContent = "Свернуть меню";
       button.setAttribute("aria-label", "Свернуть раскрытые категории");
       button.addEventListener("click", () => {
         sidebar

@@ -1,3 +1,9 @@
 {
-  "zaglushka": "Заглушка"
+  "15_chto-takoe-dannye-v-veb-prilozhenii": "Что такое данные в веб-приложении",
+  "16_formy-na-sayte-kak-polzovatel-peredaet-dannye": "Формы на сайте: как пользователь передаёт данные",
+  "17_validatsiya-kak-proveryayutsya-dannye-polzovatelya": "Валидация: как проверяются данные пользователя",
+  "18_api-kak-raznye-chasti-prilozheniya-obshchayutsya-drug-s-drugom": "API: как разные части приложения общаются друг с другом",
+  "19_json_universalnyy_format_peredachi_dannyh": "JSON: универсальный формат передачи данных",
+  "20_fetch-zaprosy_kak_sayt_poluchaet_dannye_s_servera": "Fetch-запросы: как сайт получает данные с сервера",
+  "21_sostoyanie-prilozheniya_chto-sayt-pomnit-vo-vremya-raboty": "Состояние приложения: что сайт «помнит» во время работы"
 }

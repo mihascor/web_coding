@@ -113,13 +113,10 @@ export default function App({ Component, pageProps }: AppProps) {
 
       const sidebarTop = sidebar.getBoundingClientRect().top;
       const articleTop = activeArticle.getBoundingClientRect().top;
-      const offset =
-        articleTop -
-        sidebarTop -
-        (sidebar.clientHeight - activeArticle.offsetHeight) / 2;
+      const offset = articleTop - sidebarTop - 8;
 
       sidebar.scrollTo({
-        top: sidebar.scrollTop + offset,
+        top: Math.max(sidebar.scrollTop + offset, 0),
         behavior: "smooth",
       });
     };

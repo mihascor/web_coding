@@ -1,4 +1,9 @@
 {
   "08_html-karkas-stranitsy": "HTML: каркас страницы",
-  "09_css-vneshniy-vid-i-oformlenie": "CSS: внешний вид и оформление"
+  "09_css-vneshniy-vid-i-oformlenie": "CSS: внешний вид и оформление",
+  "10_javascript-povedenie-i-interaktivnost": "JavaScript: поведение и интерактивность",
+  "11_dom-kak-brauzer-vidit-stranitsu": "DOM: как браузер видит страницу",
+  "12_adaptivnaya-verstka-dlya-raznyh-ekranov": "Адаптивная верстка: как сайт подстраивается под разные экраны",
+  "13_ui-i-ux-vneshniy-vid-i-udobstvo": "UI и UX: чем внешний вид отличается от удобства",
+  "14_komponentnyy-podhod-v-sovremennyh-interfeysah": "Компонентный подход: из чего собираются современные интерфейсы"
 }

@@ -96,13 +96,44 @@ export default function App({ Component, pageProps }: AppProps) {
       }
 
       categoryButtons.forEach((button) => button.click());
+
+    };
+
+    const scrollToCurrentArticle = () => {
+      const sidebar = document.querySelector<HTMLElement>(
+        ".nextra-sidebar-container .nextra-scrollbar"
+      );
+      const activeArticle = document.querySelector<HTMLAnchorElement>(
+        ".nextra-sidebar-container li.active > a[href]"
+      );
+
+      if (!sidebar || !activeArticle) {
+        return;
+      }
+
+      const sidebarTop = sidebar.getBoundingClientRect().top;
+      const articleTop = activeArticle.getBoundingClientRect().top;
+      const offset =
+        articleTop -
+        sidebarTop -
+        (sidebar.clientHeight - activeArticle.offsetHeight) / 2;
+
+      sidebar.scrollTo({
+        top: sidebar.scrollTop + offset,
+        behavior: "smooth",
+      });
     };
 
     const handleRouteChange = () => {
-      window.requestAnimationFrame(openCurrentArticleCategory);
+      window.requestAnimationFrame(() => {
+        openCurrentArticleCategory();
+
+        window.requestAnimationFrame(scrollToCurrentArticle);
+      });
     };
 
     router.events.on("routeChangeComplete", handleRouteChange);
+    handleRouteChange();
 
     return () => router.events.off("routeChangeComplete", handleRouteChange);
   }, [router.events]);

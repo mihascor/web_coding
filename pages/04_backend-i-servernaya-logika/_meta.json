@@ -1,3 +1,8 @@
 {
-  "zaglushka": "Заглушка"
+  "22_backend_chto-proiskhodit-na-storone-servera": "Backend: что происходит на стороне сервера",
+  "23_marshruty_i_endpoints_kuda_otpravlyayutsya_zaprosy": "Маршруты и endpoints: куда отправляются запросы",
+  "24_biznes_logika_gde_zhivut_pravila_prilozheniya": "Бизнес-логика: где живут правила приложения",
+  "25_avtorizatsiya_i_autentifikatsiya_vhod_akkaunty_i_prava_dostupa": "Авторизация и аутентификация: вход, аккаунты и права доступа",
+  "26_sessii_cookies_i_tokeny": "Сессии, cookies и токены: как сайт узнает пользователя",
+  "27_oshibki_servera_i_statusy_otveta": "Ошибки сервера и статусы ответа: что означают 200, 404 и 500"
 }
